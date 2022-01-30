@@ -27,18 +27,17 @@ def random_secret():
     return int(byte_array,16)
 
 def get_point_pubkey(point):
-    if (point.y() % 2) == 1:
-        key = '03' + '%064x' % point.x()
-    else:
-        key = '02' + '%064x' % point.x()
-    return key
+    return (
+        '03' + '%064x' % point.x()
+        if (point.y() % 2) == 1
+        else '02' + '%064x' % point.x()
+    )
 
 
 def get_point_pubkey_uncompressed(point):
-    key = ('04' +
+    return ('04' +
            '%064x' % point.x() +
            '%064x' % point.y())
-    return key
 
 # Generate a new private key.
 secret = random_secret()

@@ -13,8 +13,7 @@ def get_address(which):
     while 1:
         print("enter the %s address=> " % which, end='')
         address = input()
-        is_valid = is_address_valid(address)
-        if is_valid:
+        if is_valid := is_address_valid(address):
             return address
         print("invalid address, please try again")
 
@@ -26,8 +25,7 @@ print(spendables)
 while 1:
     print("enter the WIF for %s=> " % src_address, end='')
     wif = input()
-    is_valid = is_wif_valid(wif)
-    if is_valid:
+    if is_valid := is_wif_valid(wif):
         break
     print("invalid wif, please try again")
 

@@ -18,17 +18,12 @@ block_value = 0
 
 # Iterate through each transaction ID in the block
 for txid in transactions:
-    tx_value = 0
     # Retrieve the raw transaction by ID
     raw_tx = p.getrawtransaction(txid)
     # Decode the transaction
     decoded_tx = p.decoderawtransaction(raw_tx)
-    # Iterate through each output in the transaction
-    for output in decoded_tx['vout']:
-        # Add up the value of each output
-        tx_value = tx_value + output['value']
-
+    tx_value = sum(output['value'] for output in decoded_tx['vout'])
     # Add the value of this transaction to the total
-    block_value = block_value + tx_value
+    block_value += tx_value
 
 print("Total value in block: ", block_value)
